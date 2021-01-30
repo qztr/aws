@@ -12,6 +12,9 @@
         {{ form.hidden_tag() }}
         {{ wtf.form_field(form.someData, class='form-control', placeholder='', autocomplete="off") }}
     </form>
+    <br><br>
+    {% for row in all_data %}
+    <label >{{ row.somedata }}</label>
 </body>
 
 </html>

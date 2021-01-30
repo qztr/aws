@@ -36,5 +36,7 @@ def index():
         db.session.add(mydata)
         db.session.commit()
 
-    return render_template('index.html', title='Home', form=form)
+        all_data = SomeData.query.all()
+
+    return render_template('index.html', title='Home', form=form, all_data = all_data)
 
