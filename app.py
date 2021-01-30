@@ -36,7 +36,8 @@ def index():
         mydata = SomeData(somedata = form.someData.data)
         db.session.add(mydata)
         db.session.commit()
-        return render_template('index.html', title='Home', form=form, all_data = all_data)
-        
+        return redirect(url_for('/'))
+
+
     return render_template('index.html', title='Home', form=form, all_data = all_data)
 
