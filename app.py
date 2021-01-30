@@ -1,6 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask, render_template, flash, request
 from wtforms import Form, TextField, TextAreaField, validators, StringField, SubmitField
+from flask_wtf import FlaskForm
 
 # from app import routes
 # from app import models
@@ -8,16 +9,16 @@ from wtforms import Form, TextField, TextAreaField, validators, StringField, Sub
 app = Flask(__name__)
 
 
-SQLALCHEMY_DATABASE_URI = 'postgres://mouse:gnusmas@localhost/cheese'
-SECRET_KEY = "secret key!"
+app.config["SQLALCHEMY_DATABASE_URI"]= 'postgres://mouse:gnusmas@localhost/cheese'
+app.config["SECRET_KEY"] = "secret key!"
 DEBUG = True
 
 
 db = SQLAlchemy(app)
 
 
-class MyForm(Form):
-    someData = TextField('Name:', validators=[validators.required()])
+class MyForm(FlaskForm):
+    someData = TextField('Data:', validators=[validators.required()])
 
 class SomeData(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -27,16 +28,15 @@ class SomeData(db.Model):
         self.status = status
 
 
-@app.route('/')
-@app.route('/index')
+@app.route('/',methods=['GET', 'POST'])
 def index():
     form = MyForm()
+    all_data = SomeData.query.all()
     if form.validate_on_submit():
         mydata = SomeData(somedata = form.someData.data)
         db.session.add(mydata)
         db.session.commit()
 
-        all_data = SomeData.query.all()
 
     return render_template('index.html', title='Home', form=form, all_data = all_data)
 
