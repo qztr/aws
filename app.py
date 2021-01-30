@@ -24,8 +24,8 @@ class SomeData(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     somedata = db.Column(db.String(200))
 
-    def __init__(self,status):
-        self.status = status
+    def __init__(self,somedata):
+        self.status = somedata
 
 
 @app.route('/',methods=['GET', 'POST'])
@@ -36,7 +36,7 @@ def index():
         mydata = SomeData(somedata = form.someData.data)
         db.session.add(mydata)
         db.session.commit()
-
-
+        return render_template('index.html', title='Home', form=form, all_data = all_data)
+        
     return render_template('index.html', title='Home', form=form, all_data = all_data)
 

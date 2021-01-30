@@ -11,15 +11,15 @@
     <form action="/" method="POST">
         {{ form.hidden_tag() }}
         {{ form.someData }}
+        <button class="" type="submit">Send</button>
     </form>
-    <button class="" type="submit">Send</button>
 
     <br><br>
 
     {% for row in all_data %}
-    <label >{{ row.somedata }}</label>
+    <label>{{ row.somedata }}</label>
     {% endfor %}
-    
+
 </body>
 
 </html>
