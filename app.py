@@ -9,35 +9,37 @@ from flask_wtf import FlaskForm
 app = Flask(__name__)
 
 
-app.config["SQLALCHEMY_DATABASE_URI"]= 'postgres://mouse:gnusmas@localhost/cheese'
-app.config["SECRET_KEY"] = "secret key!"
-DEBUG = True
+# app.config["SQLALCHEMY_DATABASE_URI"]= 'postgres://mouse:gnusmas@localhost/cheese'
+# app.config["SECRET_KEY"] = "secret key!"
+# DEBUG = True
 
 
-db = SQLAlchemy(app)
+# db = SQLAlchemy(app)
 
 
-class MyForm(FlaskForm):
-    someData = TextField('Data:', validators=[validators.required()])
+# class MyForm(FlaskForm):
+#     someData = TextField('Data:', validators=[validators.required()])
 
-class SomeData(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    somedata = db.Column(db.String(200))
+# class SomeData(db.Model):
+#     id = db.Column(db.Integer, primary_key=True)
+#     somedata = db.Column(db.String(200))
 
-    def __init__(self,somedata):
-        self.somedata = somedata
+#     def __init__(self,somedata):
+#         self.somedata = somedata
 
 
 @app.route('/',methods=['GET', 'POST'])
 def index():
-    form = MyForm()
-    all_data = SomeData.query.all()
-    if form.validate_on_submit():
-        mydata = SomeData(somedata = form.someData.data)
-        db.session.add(mydata)
-        db.session.commit()
-        return redirect(url_for('index'))
+    # form = MyForm()
+    # all_data = SomeData.query.all()
+    # if form.validate_on_submit():
+    #     mydata = SomeData(somedata = form.someData.data)
+    #     db.session.add(mydata)
+    #     db.session.commit()
+    #     return redirect(url_for('index'))
 
 
-    return render_template('index.html', title='Home', form=form, all_data = all_data)
+    # return render_template('index.html', title='Home', form=form, all_data = all_data)
+    return render_template('index2.html')
+
 
