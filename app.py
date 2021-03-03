@@ -9,7 +9,7 @@ from flask_wtf import FlaskForm
 app = Flask(__name__)
 
 
-app.config["SQLALCHEMY_DATABASE_URI"]= 'postgres://mouse:gnusmas@localhost/cheese'
+app.config["SQLALCHEMY_DATABASE_URI"]= 'postgres://*****@localhost/cheese'
 app.config["SECRET_KEY"] = "secret key!"
 DEBUG = True
 
